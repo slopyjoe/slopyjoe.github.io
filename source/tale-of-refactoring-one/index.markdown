@@ -6,7 +6,7 @@ comments: false
 sharing: true
 footer: true
 ---
-###Brief explanation of 'tales of the refactoring'###
+###Brief explanation of 'tales of the refactoring'
 
 Tales of the Refactoring is a collections of interesting refactorings discovered while adding features, fixing bugs (unknown features), or just paying off some technical debt (features stashed for a later day). With that said know that some tales here may be misinterpreted, not fully understood, or just plain old wrong. Either way approach these tales with knowing that they are just explainations for a day of development.
 
@@ -15,7 +15,7 @@ These refactoring tales aren't meant to be ammunition for times when you are itc
 Action Items are meant for research for the author to understand what happened better and grow his ubiquitous language domain being Software Development.
 
 
-###Configuration for conditional logic### 
+###Configuration for conditional logic
 
 While updating some validation logic we ran into a case where config options were passed in to allow conditional validation to happen. This wasn't an issue  until we needed another conditional validation to happen, then we quickly (ok maybe not so quickly and not we mainly my pair) relized that this isn't going to end well. Below is an example of some action class with config options to conditional do some action. 
 
@@ -77,7 +77,7 @@ The final product allows addictional actions to be added to the `ConfigAction` c
 
 Action Items - research name of refactoring and patterns that would have arised.
 
-###Decorated Algorithm###
+###Decorated Algorithm
 
 Next we ran into this little gem while adding a new accessor.
 (Note simplified example because I can't remember exactly how it was but it isn't the point to regurgitate what we did but to explained what was learned)
