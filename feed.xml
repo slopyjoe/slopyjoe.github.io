@@ -5,13 +5,13 @@
     <description></description>
     <link>http://slopyjoe.github.io/</link>
     <atom:link href="http://slopyjoe.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 07 Feb 2016 10:47:40 -0700</pubDate>
-    <lastBuildDate>Sun, 07 Feb 2016 10:47:40 -0700</lastBuildDate>
-    <generator>Jekyll v3.1.1</generator>
+    <pubDate>Wed, 02 Mar 2016 19:42:36 -0700</pubDate>
+    <lastBuildDate>Wed, 02 Mar 2016 19:42:36 -0700</lastBuildDate>
+    <generator>Jekyll v3.1.2</generator>
     
       <item>
         <title>Tales of the Refactoring #1</title>
-        <description>&lt;h2 id=&quot;brief-explanation-of-tales-of-the-refactoring&quot;&gt;Brief explanation of ‘tales of the refactoring’&lt;/h2&gt;
+        <description>&lt;p&gt;##Brief explanation of ‘tales of the refactoring’&lt;/p&gt;
 
 &lt;p&gt;Tales of the Refactoring is a collections of interesting refactorings discovered while adding features, fixing bugs (unknown features), or just paying off some technical debt (features stashed for a later day). With that said know that some tales here may be misinterpreted, not fully understood, or just plain old wrong. Either way approach these tales knowing that they are just explanations for a day of development.&lt;/p&gt;
 
@@ -19,7 +19,7 @@
 
 &lt;p&gt;Action Items are meant for research for the author to understand what happened better and grow his ubiquitous language domain being Software Development.&lt;/p&gt;
 
-&lt;h2 id=&quot;configuration-for-conditional-logic&quot;&gt;Configuration for conditional logic&lt;/h2&gt;
+&lt;p&gt;##Configuration for conditional logic&lt;/p&gt;
 
 &lt;p&gt;While updating some validation logic we ran into a case where config options were passed in to allow conditional validation to happen. This wasn’t an issue  until we needed another conditional validation to happen, then we quickly (ok maybe not so quickly and not we mainly my pair) realized that this isn’t going to end well. Below is an example of some action class with config options to conditionally do some action.&lt;/p&gt;
 
@@ -81,7 +81,7 @@ My pair pointed out that it was looking like something he read from Martin Fowle
 
 &lt;p&gt;Action Items - research name of refactoring and patterns that would have arisen.&lt;/p&gt;
 
-&lt;h2 id=&quot;decorated-algorithm&quot;&gt;Decorated Algorithm&lt;/h2&gt;
+&lt;p&gt;##Decorated Algorithm&lt;/p&gt;
 
 &lt;p&gt;Next we ran into this little gem while adding a new accessor.
 (Note simplified example because I can’t remember exactly how it was but it isn’t the point to regurgitate what we did but to explain what was learned)&lt;/p&gt;
