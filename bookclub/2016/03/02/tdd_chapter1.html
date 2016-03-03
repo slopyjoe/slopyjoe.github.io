@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Test Driven Development Intro/Chapter 1</title>
+  <meta name="description" content="AboutThere are two things I want to get better, 1) writing more and 2) reading more. So since we all love efficiency why not combine the two needs.This serie...">
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://slopyjoe.github.io/bookclub/2016/03/02/tdd_chapter1.html">
+  <link rel="alternate" type="application/rss+xml" title="Sloppy Coding" href="http://slopyjoe.github.io/feed.xml">
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">Sloppy Coding</a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+        
+          
+          <a class="page-link" href="/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Test Driven Development Intro/Chapter 1</h1>
+    <p class="post-meta"><time datetime="2016-03-02T21:16:17-07:00" itemprop="datePublished">Mar 2, 2016</time></p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <h1 id="about">About</h1>
+<p>There are two things I want to get better, 1) writing more and 2) reading more. So since we all love efficiency why not combine the two needs.
+This series of posts will be target at summarizing a chapter read to how I interpreted it. The book of interest at the moment is Kent Beck’s
+Test Driven Development. As a note some of these posts will be short and sweet and some will be in more detail, all of which are for me and how I interpreted that chapter.
+Without further ado lets begin.</p>
+
+<h1 id="part-1---the-money-example">Part 1 - The Money Example</h1>
+
+<p>I will be trying out any examples with code and will post said code on GitHub at <a href="https://github.com/slopyjoe/bookclub-source.git">bookclub-source</a>
+I will try to keep it broken up by chapter then by language. Yes I want to experiment with different languages if time is permitting.</p>
+
+<h2 id="chapter-1-multi-currency-money">Chapter 1 Multi-Currency Money</h2>
+<p>Ah the beginning, it always seems the hardest just to get the ball rolling but once it’s in motion you can’t stop it!
+Before any code/test examples are given we first see what we are trying to achieve. This is an important tool that I seem to forget a lot or it gets lost in my ambition to code.</p>
+
+<p>The requirement given to us is the ability to add multiple amounts in different currencies and convert the end result to a certain currency using exchange rates.
+Which then implies we need to be able to convert an amount in one currency to another using an exchange rate.</p>
+
+<p>Kent Beck then writes up a todo list with the two requirements which looks like</p>
+
+<ul>
+  <li>$5 + 10 CHF = $10 if rate is 2:1</li>
+  <li><strong>$5 * 2 = $10</strong></li>
+</ul>
+
+<p>Notice we tackle the second item as it is the simplest thing we can do to get the ball rolling. The main requirement is the first item but looking at it seems daunting. Not only that
+but can tempt me to over optimize or over engineer a solution because I’ll focus on too much too soon. The idea is finding the smallest thing I can do to get the ball rolling.</p>
+
+<p>Now we can start writing some <del>code</del> tests.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">testMultiplication</span><span class="p">(</span><span class="o">)</span> <span class="o">{</span>
+  <span class="n">Dollar</span> <span class="n">five</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Dollar</span><span class="o">(</span><span class="mi">5</span><span class="o">);</span>
+  <span class="n">five</span><span class="o">.</span><span class="na">times</span><span class="o">(</span><span class="mi">2</span><span class="o">);</span>
+  <span class="n">assertEquals</span><span class="o">(</span><span class="mi">10</span><span class="o">,</span> <span class="n">five</span><span class="o">.</span><span class="na">amount</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>Some of us might look at this simple test and say everything looks awesome! While some of us (me included) will look at this and curse, stating things like ew public members(amount) or OMG how
+can you be mutating Dollar’s amount that’s sacrilegious. 
+The thing to remember is if we(I) focus on making the cleanest, best looking code out there(seems like some utopia I try to always reach…) we loose site of our true requirement MAKE IT WORK. 
+All we need working is to multiply two numbers within our domain (Currency or in our test’s case Dollar).
+Now we shouldn’t forget about what we want done to this code, like making amount private but we shouldn’t focus on it, instead we just add it to our list and get the test to <strong>green</strong>.
+So our todo list will look like
+* $5 + 10 CHF = $10 if rate is 2:1
+* <strong>$5 * 2 = $10</strong>
+* Make “amount” private
+* Dollar side-effects
+* Money rounding?</p>
+
+<p>So my head is clear now and I can move on to getting the test Green which means I have to get the code to compile. To get the test to compile we will need the following 
+* class Dollar
+* Dollar can be constructed with an integer
+* Dollar has a method <em>times</em> that takes an integer
+* Dollar has a member field <em>amount</em></p>
+
+<p>With that said the code should look something like 
+<code class="highlighter-rouge">java
+class Dollar {
+ int amount;
+ public Dollar(int amount) {}
+ void times(int multiplier) {}
+}
+</code></p>
+
+<p>Notice that there isn’t a default value for amount or that the constructor or times methods are implemented. This is fine we just want to get the test to compile so we can see that RED.</p>
+
+<p>So now I have a failing test, and can start implementing functionality to get that test GREEN. I immediately want to start assigning amount to the amount given during construction and then mutating
+amount to itself * the multiplier given when the <em>times</em> method is invoked. This might seem legit in this case but I should focus on the smallest thing I can do to get the test to pass. 
+What Kent ended up with is 
+<code class="highlighter-rouge">java
+class Dollar {
+ int amount;
+ public Dollar(int amount) {}
+ void times(int multiplier) { amount = 5 * 2; }
+}
+</code></p>
+
+<p>Well the test is green, woo! Wait a second we have dependencies and duplication between the test and code. The test will easily turn red if we did something like 
+<code class="highlighter-rouge">java
+public void testMultiplication() {
+  Dollar five = new Dollar(5);
+  five.times(3);
+  assertEquals(15, five.amount);
+}
+</code>
+I also have duplication by having the numbers 5 and 2 in both my test code and my production code. This is where the refactoring phase comes in. I keep having to remember to take small steps, so to 
+help myself out I will focus on removing 5 first. The code should look something like 
+<code class="highlighter-rouge">java
+class Dollar {
+ int amount;
+ public Dollar(int amount) { this.amount = amount; }
+ void times(int multiplier) { amount = amount * 2; }
+}
+</code></p>
+
+<p>Now I re-run the test and validate that I’m still passing! If it is I can move onto removing the 2 to look like 
+<code class="highlighter-rouge">java
+class Dollar {
+ int amount;
+ public Dollar(int amount) { this.amount = amount; }
+ void times(int multiplier) { amount = amount * multiplier; }
+}
+</code></p>
+
+<p>Again I will re-run and validate, if all is well I can move onto making the code pretty
+<code class="highlighter-rouge">java
+class Dollar {
+ int amount;
+ public Dollar(int amount) { this.amount = amount; }
+ void times(int multiplier) { amount *= multiplier; }
+}
+</code></p>
+
+<p>Re-run and yep it’s still passing! Now I can mark off one thing on my list
+* $5 + 10 CHF = $10 if rate is 2:1
+* <del>$5 * 2 = $10</del>
+* Make “amount” private
+* Dollar side-effects
+* Money rounding?</p>
+
+<h2 id="summary">Summary</h2>
+<p>Creating lists helps keep my goals in line and allows me to focus on one thing at a time and just append my distractions to that list.
+While I focus on one item in that list I have the ability to take the smallest steps I can to scratch off that item. Then once I get a green test I have the ability to take small steps to making the
+code right and pretty(time permitting of course).
+This is helpful for me as well as for people that suffer from the curse of too many options and paths. The above code could be implemented in any number of ways all of which are right as long as they
+meet the requirement. The goal is to get the ball rolling!</p>
+
+  </div>
+
+</article>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Sloppy Coding</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>Sloppy Coding</li>
+          <li><a href="mailto:santinijoseph@gmail.com">santinijoseph@gmail.com</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <ul class="social-media-list">
+          
+
+          
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-3">
+        <p></p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>
