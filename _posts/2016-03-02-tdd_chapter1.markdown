@@ -2,7 +2,11 @@
 layout: post
 title: "Test Driven Development Intro/Chapter 1"
 date: 2016-03-02T21:16:17-07:00
-------------------------------------------------
+comments: false
+sharing: true
+footer: true
+categories: bookclub
+---
 
 # About 
 There are two things I want to get better, 1) writing more and 2) reading more. So since we all love efficiency why not combine the two needs.
