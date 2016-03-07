@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>Tales of the Refactoring #1</title>
-  <meta name="description" content="##Brief explanation of ‘tales of the refactoring’">
+  <meta name="description" content="Brief explanation of ‘tales of the refactoring’">
 
   <link rel="stylesheet" href="/css/main.css">
   <link rel="canonical" href="http://slopyjoe.github.io/refactoring/2015/09/15/tales-of-refactoring.html">
@@ -61,7 +61,7 @@
   </header>
 
   <div class="post-content">
-    <p>##Brief explanation of ‘tales of the refactoring’</p>
+    <h2 id="brief-explanation-of-tales-of-the-refactoring">Brief explanation of ‘tales of the refactoring’</h2>
 
 <p>Tales of the Refactoring is a collections of interesting refactorings discovered while adding features, fixing bugs (unknown features), or just paying off some technical debt (features stashed for a later day). With that said know that some tales here may be misinterpreted, not fully understood, or just plain old wrong. Either way approach these tales knowing that they are just explanations for a day of development.</p>
 
@@ -69,7 +69,7 @@
 
 <p>Action Items are meant for research for the author to understand what happened better and grow his ubiquitous language domain being Software Development.</p>
 
-<p>##Configuration for conditional logic</p>
+<h2 id="configuration-for-conditional-logic">Configuration for conditional logic</h2>
 
 <p>While updating some validation logic we ran into a case where config options were passed in to allow conditional validation to happen. This wasn’t an issue  until we needed another conditional validation to happen, then we quickly (ok maybe not so quickly and not we mainly my pair) realized that this isn’t going to end well. Below is an example of some action class with config options to conditionally do some action.</p>
 
@@ -131,7 +131,7 @@ My pair pointed out that it was looking like something he read from Martin Fowle
 
 <p>Action Items - research name of refactoring and patterns that would have arisen.</p>
 
-<p>##Decorated Algorithm</p>
+<h2 id="decorated-algorithm">Decorated Algorithm</h2>
 
 <p>Next we ran into this little gem while adding a new accessor.
 (Note simplified example because I can’t remember exactly how it was but it isn’t the point to regurgitate what we did but to explain what was learned)</p>
@@ -242,4 +242,3 @@ My pair pointed out that it was looking like something he read from Martin Fowle
   </body>
 
 </html>
-                                                                                                                   

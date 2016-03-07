@@ -5,13 +5,152 @@
     <description></description>
     <link>http://slopyjoe.github.io/</link>
     <atom:link href="http://slopyjoe.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 02 Mar 2016 19:42:36 -0700</pubDate>
-    <lastBuildDate>Wed, 02 Mar 2016 19:42:36 -0700</lastBuildDate>
+    <pubDate>Sun, 06 Mar 2016 21:30:44 -0700</pubDate>
+    <lastBuildDate>Sun, 06 Mar 2016 21:30:44 -0700</lastBuildDate>
     <generator>Jekyll v3.1.2</generator>
     
       <item>
+        <title>Test Driven Development Intro/Chapter 1</title>
+        <description>&lt;h1 id=&quot;about&quot;&gt;About&lt;/h1&gt;
+&lt;p&gt;There are two things I want to get better, 1) writing more and 2) reading more. So since we all love efficiency why not combine the two needs.
+This series of posts will be target at summarizing a chapter read to how I interpreted it. The book of interest at the moment is Kent Beck’s
+Test Driven Development. As a note some of these posts will be short and sweet and some will be in more detail, all of which are for me and how I interpreted that chapter.
+Without further ado lets begin.&lt;/p&gt;
+
+&lt;h1 id=&quot;part-1---the-money-example&quot;&gt;Part 1 - The Money Example&lt;/h1&gt;
+
+&lt;p&gt;I will be trying out any examples with code and will post said code on GitHub at &lt;a href=&quot;https://github.com/slopyjoe/bookclub-source.git&quot;&gt;bookclub-source&lt;/a&gt;
+I will try to keep it broken up by chapter then by language. Yes I want to experiment with different languages if time is permitting.&lt;/p&gt;
+
+&lt;h2 id=&quot;chapter-1-multi-currency-money&quot;&gt;Chapter 1 Multi-Currency Money&lt;/h2&gt;
+&lt;p&gt;Ah the beginning, it always seems the hardest just to get the ball rolling but once it’s in motion you can’t stop it!
+Before any code/test examples are given we first see what we are trying to achieve. This is an important tool that I seem to forget a lot or it gets lost in my ambition to code.&lt;/p&gt;
+
+&lt;p&gt;The requirement given to us is the ability to add multiple amounts in different currencies and convert the end result to a certain currency using exchange rates.
+Which then implies we need to be able to convert an amount in one currency to another using an exchange rate.&lt;/p&gt;
+
+&lt;p&gt;Kent Beck then writes up a todo list with the two requirements which looks like&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;$5 + 10 CHF = $10 if rate is 2:1&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;$5 * 2 = $10&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Notice we tackle the second item as it is the simplest thing we can do to get the ball rolling. The main requirement is the first item but looking at it seems daunting. Not only that
+but can tempt me to over optimize or over engineer a solution because I’ll focus on too much too soon. The idea is finding the smallest thing I can do to get the ball rolling.&lt;/p&gt;
+
+&lt;p&gt;Now we can start writing some &lt;del&gt;code&lt;/del&gt; tests.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;testMultiplication&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;Dollar&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;five&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Dollar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;five&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;times&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;assertEquals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;five&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;amount&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Some of us might look at this simple test and say everything looks awesome! While some of us (me included) will look at this and curse, stating things like ew public members(amount) or OMG how
+can you be mutating Dollar’s amount that’s sacrilegious. 
+The thing to remember is if we(I) focus on making the cleanest, best looking code out there(seems like some utopia I try to always reach…) we loose site of our true requirement MAKE IT WORK. 
+All we need working is to multiply two numbers within our domain (Currency or in our test’s case Dollar).
+Now we shouldn’t forget about what we want done to this code, like making amount private but we shouldn’t focus on it, instead we just add it to our list and get the test to &lt;strong&gt;green&lt;/strong&gt;.
+So our todo list will look like
+* $5 + 10 CHF = $10 if rate is 2:1
+* &lt;strong&gt;$5 * 2 = $10&lt;/strong&gt;
+* Make “amount” private
+* Dollar side-effects
+* Money rounding?&lt;/p&gt;
+
+&lt;p&gt;So my head is clear now and I can move on to getting the test Green which means I have to get the code to compile. To get the test to compile we will need the following 
+* class Dollar
+* Dollar can be constructed with an integer
+* Dollar has a method &lt;em&gt;times&lt;/em&gt; that takes an integer
+* Dollar has a member field &lt;em&gt;amount&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;With that said the code should look something like 
+&lt;code class=&quot;highlighter-rouge&quot;&gt;java
+class Dollar {
+ int amount;
+ public Dollar(int amount) {}
+ void times(int multiplier) {}
+}
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Notice that there isn’t a default value for amount or that the constructor or times methods are implemented. This is fine we just want to get the test to compile so we can see that RED.&lt;/p&gt;
+
+&lt;p&gt;So now I have a failing test, and can start implementing functionality to get that test GREEN. I immediately want to start assigning amount to the amount given during construction and then mutating
+amount to itself * the multiplier given when the &lt;em&gt;times&lt;/em&gt; method is invoked. This might seem legit in this case but I should focus on the smallest thing I can do to get the test to pass. 
+What Kent ended up with is 
+&lt;code class=&quot;highlighter-rouge&quot;&gt;java
+class Dollar {
+ int amount;
+ public Dollar(int amount) {}
+ void times(int multiplier) { amount = 5 * 2; }
+}
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Well the test is green, woo! Wait a second we have dependencies and duplication between the test and code. The test will easily turn red if we did something like 
+&lt;code class=&quot;highlighter-rouge&quot;&gt;java
+public void testMultiplication() {
+  Dollar five = new Dollar(5);
+  five.times(3);
+  assertEquals(15, five.amount);
+}
+&lt;/code&gt;
+I also have duplication by having the numbers 5 and 2 in both my test code and my production code. This is where the refactoring phase comes in. I keep having to remember to take small steps, so to 
+help myself out I will focus on removing 5 first. The code should look something like 
+&lt;code class=&quot;highlighter-rouge&quot;&gt;java
+class Dollar {
+ int amount;
+ public Dollar(int amount) { this.amount = amount; }
+ void times(int multiplier) { amount = amount * 2; }
+}
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Now I re-run the test and validate that I’m still passing! If it is I can move onto removing the 2 to look like 
+&lt;code class=&quot;highlighter-rouge&quot;&gt;java
+class Dollar {
+ int amount;
+ public Dollar(int amount) { this.amount = amount; }
+ void times(int multiplier) { amount = amount * multiplier; }
+}
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Again I will re-run and validate, if all is well I can move onto making the code pretty
+&lt;code class=&quot;highlighter-rouge&quot;&gt;java
+class Dollar {
+ int amount;
+ public Dollar(int amount) { this.amount = amount; }
+ void times(int multiplier) { amount *= multiplier; }
+}
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Re-run and yep it’s still passing! Now I can mark off one thing on my list
+* $5 + 10 CHF = $10 if rate is 2:1
+* &lt;del&gt;$5 * 2 = $10&lt;/del&gt;
+* Make “amount” private
+* Dollar side-effects
+* Money rounding?&lt;/p&gt;
+
+&lt;h2 id=&quot;summary&quot;&gt;Summary&lt;/h2&gt;
+&lt;p&gt;Creating lists helps keep my goals in line and allows me to focus on one thing at a time and just append my distractions to that list.
+While I focus on one item in that list I have the ability to take the smallest steps I can to scratch off that item. Then once I get a green test I have the ability to take small steps to making the
+code right and pretty(time permitting of course).
+This is helpful for me as well as for people that suffer from the curse of too many options and paths. The above code could be implemented in any number of ways all of which are right as long as they
+meet the requirement. The goal is to get the ball rolling!&lt;/p&gt;
+</description>
+        <pubDate>Wed, 02 Mar 2016 21:16:17 -0700</pubDate>
+        <link>http://slopyjoe.github.io/bookclub/2016/03/02/tdd_chapter1.html</link>
+        <guid isPermaLink="true">http://slopyjoe.github.io/bookclub/2016/03/02/tdd_chapter1.html</guid>
+        
+        
+        <category>bookclub</category>
+        
+      </item>
+    
+      <item>
         <title>Tales of the Refactoring #1</title>
-        <description>&lt;p&gt;##Brief explanation of ‘tales of the refactoring’&lt;/p&gt;
+        <description>&lt;h2 id=&quot;brief-explanation-of-tales-of-the-refactoring&quot;&gt;Brief explanation of ‘tales of the refactoring’&lt;/h2&gt;
 
 &lt;p&gt;Tales of the Refactoring is a collections of interesting refactorings discovered while adding features, fixing bugs (unknown features), or just paying off some technical debt (features stashed for a later day). With that said know that some tales here may be misinterpreted, not fully understood, or just plain old wrong. Either way approach these tales knowing that they are just explanations for a day of development.&lt;/p&gt;
 
@@ -19,7 +158,7 @@
 
 &lt;p&gt;Action Items are meant for research for the author to understand what happened better and grow his ubiquitous language domain being Software Development.&lt;/p&gt;
 
-&lt;p&gt;##Configuration for conditional logic&lt;/p&gt;
+&lt;h2 id=&quot;configuration-for-conditional-logic&quot;&gt;Configuration for conditional logic&lt;/h2&gt;
 
 &lt;p&gt;While updating some validation logic we ran into a case where config options were passed in to allow conditional validation to happen. This wasn’t an issue  until we needed another conditional validation to happen, then we quickly (ok maybe not so quickly and not we mainly my pair) realized that this isn’t going to end well. Below is an example of some action class with config options to conditionally do some action.&lt;/p&gt;
 
@@ -81,7 +220,7 @@ My pair pointed out that it was looking like something he read from Martin Fowle
 
 &lt;p&gt;Action Items - research name of refactoring and patterns that would have arisen.&lt;/p&gt;
 
-&lt;p&gt;##Decorated Algorithm&lt;/p&gt;
+&lt;h2 id=&quot;decorated-algorithm&quot;&gt;Decorated Algorithm&lt;/h2&gt;
 
 &lt;p&gt;Next we ran into this little gem while adding a new accessor.
 (Note simplified example because I can’t remember exactly how it was but it isn’t the point to regurgitate what we did but to explain what was learned)&lt;/p&gt;
@@ -161,75 +300,3 @@ My pair pointed out that it was looking like something he read from Martin Fowle
     
   </channel>
 </rss>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           =&quot;k&quot;&gt;end&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MacCompterAccessor&lt;/span&gt;
-
-  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;computers&lt;/span&gt;
-    &lt;span class=&quot;no&quot;&gt;ComputerAccessor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;computers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;where&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;type: &lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;Mac&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;WindowsAndDellCompterAccessor&lt;/span&gt;
-
-  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;computers&lt;/span&gt;
-    &lt;span class=&quot;no&quot;&gt;ComputerAccessor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;computers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;where&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-      &lt;span class=&quot;ss&quot;&gt;type: &lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;Windows&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-      &lt;span class=&quot;ss&quot;&gt;manufacturer: &lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;Dell&#39;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;After looking a the code puzzled and doodles describing the behavior of all the classes we encountered that decorated the &lt;code class=&quot;highlighter-rouge&quot;&gt;ComputerAccessor#computers&lt;/code&gt; method.&lt;sup id=&quot;fnref:decorated&quot;&gt;&lt;a href=&quot;#fn:decorated&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; We came to the conclusion that all the enhanced &lt;code class=&quot;highlighter-rouge&quot;&gt;ComputerAccessor&lt;/code&gt;’s were just filtering on either type or manufacturer.&lt;/p&gt;
-
-&lt;p&gt;We ended up enhancing the original &lt;code class=&quot;highlighter-rouge&quot;&gt;ComputerAccessor&lt;/code&gt; to look something like&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ComputerAccessor&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;initialize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;allowed_types: &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[],&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;allowed_manufacturers: &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[])&lt;/span&gt;
-    &lt;span class=&quot;vi&quot;&gt;@allowed_types&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;allowed_typs&lt;/span&gt;
-    &lt;span class=&quot;vi&quot;&gt;@allowed_manufacturers&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;allowed_manufacturers&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-
-  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;computers&lt;/span&gt;
-    &lt;span class=&quot;no&quot;&gt;Computers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;all&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;where&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-      &lt;span class=&quot;ss&quot;&gt;type: &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;allowed_types&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-      &lt;span class=&quot;ss&quot;&gt;manufacturer: &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;allowed_manufacturers&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-
-  &lt;span class=&quot;kp&quot;&gt;private&lt;/span&gt;
-  &lt;span class=&quot;kp&quot;&gt;attr_reader&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:allowed_types&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:allowed_manufacturers&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Action Items - need to conclude what we learned&lt;/p&gt;
-
-&lt;p&gt;Category Lesson’s Learned&lt;/p&gt;
-
-&lt;div class=&quot;footnotes&quot;&gt;
-  &lt;ol&gt;
-    &lt;li id=&quot;fn:decorated&quot;&gt;
-      &lt;p&gt;Yes another new phrase learned today &lt;q&gt;Decorated Algorithm&lt;/q&gt; &lt;a href=&quot;#fnref:decorated&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-  &lt;/ol&gt;
-&lt;/div&gt;
-</description>
-        <pubDate>Tue, 15 Sep 2015 22:09:00 -0600</pubDate>
-        <link>http://slopyjoe.github.io/refactoring/2015/09/15/tales-of-refactoring.html</link>
-        <guid isPermaLink="true">http://slopyjoe.github.io/refactoring/2015/09/15/tales-of-refactoring.html</guid>
-        
-        
-        <category>refactoring</category>
-        
-      </item>
-    
-  </channel>
-</rss>
-                                                           
