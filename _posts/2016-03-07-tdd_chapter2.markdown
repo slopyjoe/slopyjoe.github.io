@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "Test Driven Development Intro/Chapter 2"
-date: 2016-03-02T21:16:17-07:00
+title: "Test Driven Development Chapter 2"
+date: 2016-03-07T21:16:17-07:00
 comments: false
 sharing: true
 footer: true
