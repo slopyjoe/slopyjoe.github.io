@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: 
+
+Sitemap: http://slopyjoe.github.io/sitemap.xml 

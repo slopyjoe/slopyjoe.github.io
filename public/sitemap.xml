@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>http://slopyjoe.github.io/blog/2015/09/15/tails-of-the-refactoring/</loc>
+    <lastmod>2015-09-15T22:09:00-06:00</lastmod>
+  </url>
+  <url>
+    <loc>http://slopyjoe.github.io/blog/2015/09/13/the-sloppy-start/</loc>
+    <lastmod>2015-09-13T23:16:20-06:00</lastmod>
+  </url>
+  <url>
+    <loc>http://slopyjoe.github.io/blog/archives/</loc>
+  </url>
+  <url>
+    <loc>http://slopyjoe.github.io/</loc>
+  </url>
+  <url>
+    <loc>http://slopyjoe.github.io/tale-of-refactoring-one/</loc>
+  </url>
+  <url>
+    <loc>http://slopyjoe.github.io/docker-helps/</loc>
+  </url>
+  <url>
+    <loc>http://slopyjoe.github.io/books/</loc>
+  </url>
+  <url>
+    <loc>http://slopyjoe.github.io/blog/categories/refactoring/</loc>
+  </url>
+</urlset>

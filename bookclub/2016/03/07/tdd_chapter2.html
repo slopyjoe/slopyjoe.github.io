@@ -64,14 +64,14 @@
   <div class="post-content" itemprop="articleBody">
     <h2 id="chapter-2-degenerate-objects">Chapter 2 Degenerate Objects</h2>
 
-<p>Kent Beck start off talking about three rules</p>
+<p>Kent Beck starts off talking about three rules</p>
 
 <ol>
-  <li>Make a test - the test serves as design documentation. How a piece of code should be invoked, what setup it needs, what outputs should we expect, and hopefully not any but what side-effects it can produce.
+  <li>Make a test - the test serves as design documentation. How a piece of code should be invoked, what setup it needs, what outputs we should expect, and what side-effects it can produce (hopefully not any).
 I see it as I love to write code but I hate to write technical documentation. By writing tests I get to start off with documentation of the code using code!!! (Crazy right?!)</li>
-  <li>Make it run - now that the documentation is done we do as little as can be done to make the documentation true. The key to remember to do <strong>as little as possible</strong>. This is liking making the code work but hiding it in the basement far far far away from anyone else.</li>
-  <li>Make it right - this is where we polish up the code as if we want to show it off to the world. Clean up the horrors we created by making it run. The documentation is our guide letting us know instantly when we
-strayed off the path.</li>
+  <li>Make it run - now that the documentation is done we do as little as can be done to make the documentation true. The key to remember to do <strong>as little as possible</strong>. This is like making the code work but hiding it in the basement far far far away from anyone else.</li>
+  <li>Make it right - this is where we polish up the code as if we want to show it off to the world. Clean up the horrors we created by making it run. The documentation is our guide, letting us know instantly when we
+stray off the path.</li>
 </ol>
 
 <p>In chapter one we focused on making a test and making it run. In doing so we created a side-effect, everytime we invoke the <em>times</em> method we mutate the <em>amount</em> Dollar contains. Since we have it running lets
@@ -81,13 +81,13 @@ make it right.</p>
 
 <ul>
   <li>$5 + 10 CHF = $10 if rate is 2:1</li>
-  <li><del>$5 * 2 = $10</del></li>
+  <li>~~$5 * 2 = $10~~</li>
   <li>Make “amount” private</li>
   <li><strong>Dollar side-effects</strong></li>
   <li>Money rounding?</li>
 </ul>
 
-<p>Before we go making the code right we need to update the <del>documentation</del> test. We want something like</p>
+<p>Before we go making the code right we need to update the ~~documentation~~ test. We want something like</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">testMultiplication</span><span class="p">(</span><span class="o">)</span> <span class="o">{</span>
   <span class="n">Dollar</span> <span class="n">five</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Dollar</span><span class="o">(</span><span class="mi">5</span><span class="o">);</span>
@@ -99,7 +99,7 @@ make it right.</p>
 </code></pre>
 </div>
 
-<p>Notice that the test fails to compile with the above changes. We again revert to step two <em>Make it run</em>, this means we need to update our code just enough to get the test to compile and see that failure.</p>
+<p>Notice that the test fails to compile with the above changes. We again revert to step two <em>Make it run</em>, this means we need to update our code just enough to get the test to compile and see the expected failure.</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Dollar</span> <span class="o">{</span>
  <span class="kt">int</span> <span class="n">amount</span><span class="o">;</span>
@@ -112,7 +112,7 @@ make it right.</p>
 </code></pre>
 </div>
 
-<p>This little stub gives us the ability to run the test and have a starting point of what to fix. Now it’s time to make it work, making small steps of course.</p>
+<p>This little stub gives us the ability to run the test and have a starting point of what to fix. Now it’s time to make it work, taking small steps of course.</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Dollar</span> <span class="o">{</span>
  <span class="kt">int</span> <span class="n">amount</span><span class="o">;</span>
@@ -124,11 +124,11 @@ make it right.</p>
 </code></pre>
 </div>
 
-<p>And bam! we removed the side-effects and updated some documentation. It is interesting seeing how during the third phase of making it right we also had to update the documentation and make it run. Just because we
+<p>And bam! we removed the side-effects and updated some documentation. It is interesting to see how, during the third phase of making it right, we also had to update the documentation and make it run. Just because we
 are on the last phase doesn’t mean we can’t go back to other phases as needed.</p>
 
-<p>Kent Beck left off the chapter talking about the importants of our <del>documentation</del> tests. It gives us something to talk about. It gives future developers something to look at and maybe not understand the
-decisions made but definitely understand the way some operation is meant to be called, what is expected of it, and what can be left behind by it. In other words this may not answer the why’s of our software but it
+<p>Kent Beck left off the chapter talking about the importance of our ~~documentation~~ tests. It gives us something to talk about. It gives future developers something to look at. They may not understand the
+decisions made but will definitely understand the way some operation is meant to be called. They will see what is expected of it, and what can be left behind by it. In other words this may not answer the why’s of our software but it
 answers the how’s and what’s of our software.</p>
 
   </div>
