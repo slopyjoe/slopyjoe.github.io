@@ -11,13 +11,13 @@ categories: bookclub
 
 ## Chapter 2 Degenerate Objects
 
-Kent Beck start off talking about three rules
+Kent Beck starts off talking about three rules
 
-1. Make a test - the test serves as design documentation. How a piece of code should be invoked, what setup it needs, what outputs should we expect, and hopefully not any but what side-effects it can produce.
+1. Make a test - the test serves as design documentation. How a piece of code should be invoked, what setup it needs, what outputs we should expect, and what side-effects it can produce (hopefully not any).
 I see it as I love to write code but I hate to write technical documentation. By writing tests I get to start off with documentation of the code using code!!! (Crazy right?!)
-1. Make it run - now that the documentation is done we do as little as can be done to make the documentation true. The key to remember to do **as little as possible**. This is liking making the code work but hiding it in the basement far far far away from anyone else.
-1. Make it right - this is where we polish up the code as if we want to show it off to the world. Clean up the horrors we created by making it run. The documentation is our guide letting us know instantly when we
-strayed off the path.
+1. Make it run - now that the documentation is done we do as little as can be done to make the documentation true. The key to remember to do **as little as possible**. This is like making the code work but hiding it in the basement far far far away from anyone else.
+1. Make it right - this is where we polish up the code as if we want to show it off to the world. Clean up the horrors we created by making it run. The documentation is our guide, letting us know instantly when we
+stray off the path.
 
 In chapter one we focused on making a test and making it run. In doing so we created a side-effect, everytime we invoke the *times* method we mutate the *amount* Dollar contains. Since we have it running lets
 make it right.
@@ -42,7 +42,7 @@ public void testMultiplication() {
 }
 ```
 
-Notice that the test fails to compile with the above changes. We again revert to step two *Make it run*, this means we need to update our code just enough to get the test to compile and see that failure.
+Notice that the test fails to compile with the above changes. We again revert to step two *Make it run*, this means we need to update our code just enough to get the test to compile and see the expected failure.
 
 ```java
 class Dollar {
@@ -55,7 +55,7 @@ class Dollar {
 }
 ```
 
-This little stub gives us the ability to run the test and have a starting point of what to fix. Now it's time to make it work, making small steps of course.
+This little stub gives us the ability to run the test and have a starting point of what to fix. Now it's time to make it work, taking small steps of course.
 
 ```java
 class Dollar {
@@ -67,9 +67,9 @@ class Dollar {
 }
 ```
 
-And bam! we removed the side-effects and updated some documentation. It is interesting seeing how during the third phase of making it right we also had to update the documentation and make it run. Just because we
+And bam! we removed the side-effects and updated some documentation. It is interesting to see how, during the third phase of making it right, we also had to update the documentation and make it run. Just because we
 are on the last phase doesn't mean we can't go back to other phases as needed.
 
-Kent Beck left off the chapter talking about the importants of our ~~documentation~~ tests. It gives us something to talk about. It gives future developers something to look at and maybe not understand the
-decisions made but definitely understand the way some operation is meant to be called, what is expected of it, and what can be left behind by it. In other words this may not answer the why's of our software but it
+Kent Beck left off the chapter talking about the importance of our ~~documentation~~ tests. It gives us something to talk about. It gives future developers something to look at. They may not understand the
+decisions made but will definitely understand the way some operation is meant to be called. They will see what is expected of it, and what can be left behind by it. In other words this may not answer the why's of our software but it
 answers the how's and what's of our software.
